@@ -14,7 +14,7 @@
 To install `colorex-py`, you can use pip:
 
 ```bash
-pip install colorex
+pip install colorex-py
 ```
 
 ## Usage

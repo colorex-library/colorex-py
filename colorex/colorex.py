@@ -34,45 +34,47 @@ def apply_ansi(text: str, ansi_code: str) -> str:
     return f"{ansi_code}{text}\033[0m"
 
 
-class ColoredStr(str):
-    def __new__(cls, value):
-        return super().__new__(cls, value)
+class Colorize:
+    def __init__(self, value: str):
+        self.value = value
 
-    def color(self, color: str) -> 'ColoredStr':
+    def color(self, color: str) -> 'Colorize':
         try:
             c = Color.from_hex(color) if color.startswith('#') else Color.from_rgb(color)
-            return ColoredStr(apply_ansi(self, c.to_foreground_ansi()))
+            return Colorize(apply_ansi(self.value, c.to_foreground_ansi()))
         except ValueError:
             return self
 
-    def bg_color(self, color: str) -> 'ColoredStr':
+    def bg_color(self, color: str) -> 'Colorize':
         try:
             c = Color.from_hex(color) if color.startswith('#') else Color.from_rgb(color)
-            return ColoredStr(apply_ansi(self, c.to_background_ansi()))
+            return Colorize(apply_ansi(self.value, c.to_background_ansi()))
         except ValueError:
             return self
 
-    def bold(self) -> 'ColoredStr':
-        return ColoredStr(apply_ansi(self, "\033[1m"))
+    def bold(self) -> 'Colorize':
+        return Colorize(apply_ansi(self.value, "\033[1m"))
 
-    def italic(self) -> 'ColoredStr':
-        return ColoredStr(apply_ansi(self, "\033[3m"))
+    def italic(self) -> 'Colorize':
+        return Colorize(apply_ansi(self.value, "\033[3m"))
 
-    def underline(self) -> 'ColoredStr':
-        return ColoredStr(apply_ansi(self, "\033[4m"))
+    def underline(self) -> 'Colorize':
+        return Colorize(apply_ansi(self.value, "\033[4m"))
 
-    def strikethrough(self) -> 'ColoredStr':
-        return ColoredStr(apply_ansi(self, "\033[9m"))
+    def strikethrough(self) -> 'Colorize':
+        return Colorize(apply_ansi(self.value, "\033[9m"))
 
-    def dim(self) -> 'ColoredStr':
-        return ColoredStr(apply_ansi(self, "\033[2m"))
+    def dim(self) -> 'Colorize':
+        return Colorize(apply_ansi(self.value, "\033[2m"))
 
-    def invert(self) -> 'ColoredStr':
-        return ColoredStr(apply_ansi(self, "\033[7m"))
+    def invert(self) -> 'Colorize':
+        return Colorize(apply_ansi(self.value, "\033[7m"))
+
+    def __str__(self):
+        return self.value
 
     def __format__(self, format_spec):
-        return str(self)  # ANSI 코드 포함된 문자열 그대로 반환
+        return str(self)
 
-
-# Monkey-patch str to support ColoredStr methods
-str.__bases__ += (ColoredStr,)
+def colored_string(value: str) -> Colorize:
+    return Colorize(value)
