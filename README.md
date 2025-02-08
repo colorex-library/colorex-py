@@ -58,8 +58,8 @@ print("{}", "ALL".color("0,255,0").bold().italic().underline().strikethrough().d
 The following example would result in a green-colored "Hello, World!" and a red "Error!" message in the terminal.
 
 ```python
-print("{}", "Hello, World!".color("0,255,0"))  // Green text
-print("{}", "Error!".color("#FF0000"))         // Red text
+print("{}", "Hello, World!".color("0,255,0"))  # Green text
+print("{}", "Error!".color("#FF0000"))         # Red text
 ```
 
 ## Supported Color Formats

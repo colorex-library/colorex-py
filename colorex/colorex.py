@@ -35,6 +35,9 @@ def apply_ansi(text: str, ansi_code: str) -> str:
 
 
 class ColoredStr(str):
+    def __new__(cls, value):
+        return super().__new__(cls, value)
+
     def color(self, color: str) -> 'ColoredStr':
         try:
             c = Color.from_hex(color) if color.startswith('#') else Color.from_rgb(color)
@@ -66,6 +69,9 @@ class ColoredStr(str):
 
     def invert(self) -> 'ColoredStr':
         return ColoredStr(apply_ansi(self, "\033[7m"))
+
+    def __format__(self, format_spec):
+        return str(self)  # ANSI 코드 포함된 문자열 그대로 반환
 
 
 # Monkey-patch str to support ColoredStr methods
