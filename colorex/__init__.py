@@ -1,3 +1,2 @@
-from .colorex import ColoredStr, apply_color_to_str
+from .colorex import stylize
 
-apply_color_to_str()

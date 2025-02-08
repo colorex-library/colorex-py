@@ -21,25 +21,31 @@ pip install colorex-py
 Here's how you can use `colorex` to add color and styles to your terminal output:
 
 ```python
-import colorex
+from colorex import stylize
 
-# Basic color usage
-print(f"{}", "Hello, World!".color("0,255,0"))  # Green text
-print(f"{}", "Error!".color("#FF0000"))         # Red text
+# Example usage
+print(stylize("Hello, World!").color("0,255,0"))  # Green text
+print(stylize("Error!").color("#FF0000"))  # Red text
 
-# Text styles
-print(f"{}", "Bold Text".bold())                # Bold text
-print(f"{}", "Italic Text".italic())            # Italic text
-print(f"{}", "Underlined Text".underline())     # Underlined text
-print(f"{}", "Strikethrough Text".strikethrough()) # Strikethrough text
-print(f"{}", "Dim Text".dim());                  # Dim text
-print(f"{}", "Inverted Text".invert())          # Inverted (background) text
+print(stylize("Bold Text").bold())  # Bold text
+print(stylize("Italic Text").italic())  # Italic text
+print(stylize("Underlined Text").underline())  # Underlined text
+print(stylize("Strikethrough Text").strikethrough())  # Strikethrough text
+print(stylize("Dim Text").dim())  # Dim text
+print(stylize("Inverted Text").invert())  # Inverted background text
 
-# Background color
-print(f"{}", "Background Color".bg_color("0,0,255")) # Blue background
+print(stylize("Background Color").bg_color("0,0,255"))  # Blue background
 
 # Combining multiple styles
-print(f"{}", "ALL".color("0,255,0").bold().italic().underline().strikethrough().dim().invert().bg_color("0,0,255")) # All styles
+print(stylize("ALL")
+      .color("0,255,0")
+      .bold()
+      .italic()
+      .underline()
+      .strikethrough()
+      .dim()
+      .invert()
+      .bg_color("0,0,255"))  # All styles applied
 ```
 
 ## Supported Styles
@@ -58,8 +64,8 @@ print(f"{}", "ALL".color("0,255,0").bold().italic().underline().strikethrough().
 The following example would result in a green-colored "Hello, World!" and a red "Error!" message in the terminal.
 
 ```python
-print(f"{}", "Hello, World!".color("0,255,0"))  # Green text
-print(f"{}", "Error!".color("#FF0000"))         # Red text
+print(stylize("Hello, World!").color("0,255,0"))  # Green text
+print(stylize("Error!").color("#FF0000"))         # Red text
 ```
 
 ## Supported Color Formats
